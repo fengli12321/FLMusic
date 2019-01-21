@@ -27,22 +27,57 @@ class NetworkManager: NSObject {
     
     static func request(_ service: NetService) -> Single<JSON> {
         
-        return instance.provider.rx.request(service).map({ (response)  in
+        return instance.provider.rx.request(service).filterSuccessfulStatusCodes().catchError({ (error)  in
             
-            let statusCode = response.statusCode
-            let data = try JSON(data: response.data)
-            if statusCode/200 == 1 {
+            if let error = error as? MoyaError {
                 
-                return data
-            } else {
-                
-                let first = data.first
-                var msg = "未知错误"
-                if let first = first {
-                    let (_, msgs) = first
-                    msg = msgs[0].stringValue
+                var errorDesc = ""
+                switch error {
+                    
+                case .imageMapping(_):
+                    errorDesc = "图片"
+                case .jsonMapping(_):
+                    errorDesc = "json"
+                case .stringMapping(_):
+                    errorDesc = "string"
+                case .objectMapping(_, _):
+                    errorDesc = "obj"
+                case .encodableMapping(_):
+                    errorDesc = "编码"
+                case .statusCode(let response):
+                    
+                    if let data = try? JSON(data: response.data) {
+                        
+                        var errors = data["errors"]
+                        if errors.count > 1 {
+                            print("错误数量大于1")
+                        }
+                        throw APIError(code: response.statusCode, msg: errors[0]["detail"].stringValue)
+                    } else {
+                        errorDesc = "status error"
+                    
+                    }
+                case .underlying(_, _):
+                    errorDesc = "其他错误（超时等）"
+                case .requestMapping(_):
+                    errorDesc = "请求错误"
+                case .parameterEncoding(_):
+                    errorDesc = "请求参数错误"
                 }
-                throw APIError(code: -1, msg: msg)
+                
+                throw APIError(code: -1, msg: errorDesc)
+            } else {
+                throw APIError(code: -1, msg: "未知错误")
+            }
+            
+        }).map({ (response)  in
+            
+            if let data = try? JSON(data: response.data){
+                
+                return data["data"]
+            } else {
+            
+                throw APIError(code: -1, msg: "服务器参数错误")
             }
             
         })
@@ -50,11 +85,7 @@ class NetworkManager: NSObject {
     
     
     override init() {
-//        let configuration = URLSessionConfiguration.default
-//        configuration.httpAdditionalHeaders = Manager.defaultHTTPHeaders
-//        configuration.timeoutIntervalForRequest = 10
-//        let manager = Manager(configuration: configuration)
-//        manager.startRequestsImmediately = false
+        
 
         let requestClosure = { (endpoint: Endpoint, closure: MoyaProvider.RequestResultClosure) in
             do {

@@ -13,6 +13,7 @@ PODS:
   - Moya/RxSwift (12.0.1):
     - Moya/Core
     - RxSwift (~> 4.0)
+  - PKHUD (5.2.1)
   - Result (4.1.0)
   - RxAtomic (4.4.0)
   - RxCocoa (4.4.0):
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - Kingfisher
   - Moya
   - Moya/RxSwift
+  - PKHUD
   - RxCocoa
   - RxDataSources
   - RxSwift
@@ -48,6 +50,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - Kingfisher
     - Moya
+    - PKHUD
     - Result
     - RxAtomic
     - RxCocoa
@@ -64,6 +67,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
+  PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   RxAtomic: eacf60db868c96bfd63320e28619fe29c179656f
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
@@ -72,6 +76,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: e9d5fd36db4417d5c8e07aac5a864b9160d87eba
+PODFILE CHECKSUM: 544189b6041463cf7ece27c45413a5a8b1d034fe
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.6.0.beta.2
