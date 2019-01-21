@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import Hue
 import Hero
+import PKHUD
 
 class LoginViewController: BaseViewController {
     @IBOutlet weak var backImageView: UIImageView!
@@ -75,6 +76,17 @@ class LoginViewController: BaseViewController {
             print(value)
         }, onCompleted: {
             print("sbsb")
+        }).disposed(by: disposeBag)
+        
+        output.getCodeText.drive(self.getCodeBtn.rx.title()).disposed(by: disposeBag)
+        output.getCodeEnable.drive(self.getCodeBtn.rx.isEnabled).disposed(by: disposeBag)
+        output.getCodeEnable.drive(onNext: { [unowned self] enable in
+            
+            self.getCodeBtn.setTitleColor(enable ? .black : .darkGray, for: .normal)
+        }).disposed(by: disposeBag)
+        
+        output.getCodeValue.drive(onNext: { (code) in
+            HUD.flash(.labeledSuccess(title: "验证码", subtitle: code), delay: 3)
         }).disposed(by: disposeBag)
     }
     

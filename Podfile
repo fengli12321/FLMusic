@@ -11,7 +11,7 @@ target 'FLMusic' do
  pod 'Kingfisher' # 网络图片
  pod 'Hue' # 颜色
  pod 'SwiftyJSON' # json 解析
- 
+ pod 'PKHUD'
  # rx
  pod 'RxSwift'
  pod 'RxCocoa'
