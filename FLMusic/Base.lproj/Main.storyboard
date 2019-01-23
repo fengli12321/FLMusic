@@ -10,14 +10,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="QxS-JS-ndD">
             <objects>
-                <tabBarController id="XOb-6m-zcb" sceneMemberID="viewController">
+                <tabBarController id="XOb-6m-zcb" customClass="MyTabBarController" customModule="FLMusic" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m1E-8h-gHC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="selectedImageTintColor" red="0.1843137255" green="0.57254901960000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.1058823529" green="0.10980392160000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="lFg-IA-rpI" kind="relationship" relationship="viewControllers" id="4Qc-US-TEN"/>
@@ -30,11 +32,12 @@
         <!--asfdf-->
         <scene sceneID="dlB-fY-jRM">
             <objects>
-                <navigationController id="lFg-IA-rpI" sceneMemberID="viewController">
+                <navigationController id="lFg-IA-rpI" customClass="BaseNavigationController" customModule="FLMusic" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="asfdf" id="tAf-m4-xN9"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="loH-y3-RgZ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.10588235294117647" green="0.10980392156862745" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="J8D-dr-w94" kind="relationship" relationship="rootViewController" id="JOT-Pi-T3b"/>
@@ -44,17 +47,46 @@
             </objects>
             <point key="canvasLocation" x="-418" y="-375"/>
         </scene>
-        <!--View Controller-->
+        <!--Find View Controller-->
         <scene sceneID="ZaM-Iq-x6w">
             <objects>
-                <viewController id="J8D-dr-w94" sceneMemberID="viewController">
+                <viewController id="J8D-dr-w94" customClass="FindViewController" customModule="FLMusic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="maQ-Bz-dNT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="61f-35-V6x">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="5qu-nQ-gF4">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5qu-nQ-gF4" id="clg-V9-f0H">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="J8D-dr-w94" id="6ur-ly-qbt"/>
+                                    <outlet property="delegate" destination="J8D-dr-w94" id="KJW-o0-CqD"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="61f-35-V6x" firstAttribute="leading" secondItem="8SF-FA-HAV" secondAttribute="leading" id="WAe-he-COM"/>
+                            <constraint firstItem="8SF-FA-HAV" firstAttribute="trailing" secondItem="61f-35-V6x" secondAttribute="trailing" id="nC2-Df-4pW"/>
+                            <constraint firstItem="61f-35-V6x" firstAttribute="top" secondItem="maQ-Bz-dNT" secondAttribute="top" id="nqe-GC-AM2"/>
+                            <constraint firstAttribute="bottom" secondItem="61f-35-V6x" secondAttribute="bottom" id="uym-rd-2ms"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8SF-FA-HAV"/>
                     </view>
                     <navigationItem key="navigationItem" id="tfA-ze-9oz"/>
+                    <connections>
+                        <outlet property="tableView" destination="61f-35-V6x" id="Kjb-8k-Fwz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Swp-ib-t7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

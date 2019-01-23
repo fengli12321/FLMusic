@@ -12,6 +12,7 @@ target 'FLMusic' do
  pod 'Hue' # 颜色
  pod 'SwiftyJSON' # json 解析
  pod 'PKHUD'
+ pod 'KeychainAccess' # keychain
  # rx
  pod 'RxSwift'
  pod 'RxCocoa'

@@ -72,12 +72,6 @@ class LoginViewController: BaseViewController {
         output.errorInfo.drive(self.errorLabel.rx.text).disposed(by: disposeBag)
         output.loginEnable.drive(self.rx.loginBtnEnable).disposed(by: disposeBag)
         output.registerEnable.drive(self.rx.registerBtnEnable).disposed(by: disposeBag)
-        output.getCodeValue.drive(onNext: { (value) in
-            print(value)
-        }, onCompleted: {
-            print("sbsb")
-        }).disposed(by: disposeBag)
-        
         output.getCodeText.drive(self.getCodeBtn.rx.title()).disposed(by: disposeBag)
         output.getCodeEnable.drive(self.getCodeBtn.rx.isEnabled).disposed(by: disposeBag)
         output.getCodeEnable.drive(onNext: { [unowned self] enable in
@@ -87,6 +81,29 @@ class LoginViewController: BaseViewController {
         
         output.getCodeValue.drive(onNext: { (code) in
             HUD.flash(.labeledSuccess(title: "验证码", subtitle: code), delay: 3)
+        }).disposed(by: disposeBag)
+        
+        output.registeSuccess.drive(onNext: { [unowned self] (success, msg) in
+            
+            if success {
+                
+                self.login(show: true)
+            } else {
+                HUD.flash(.labeledError(title: "注册失败", subtitle: msg), delay: 2)
+            }
+        }).disposed(by: disposeBag)
+        
+        output.loginSuccess.drive(onNext: { (success, msg) in
+            
+            if success {
+                HUD.flash(.labeledSuccess(title: nil, subtitle: "登录成功"), onView: nil, delay: 1, completion: { _ in
+                    
+                    let main = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+                    kKeyWindow.rootViewController = main
+                })
+            } else {
+                HUD.flash(.labeledError(title: "登录失败", subtitle: msg), delay: 2)
+            }
         }).disposed(by: disposeBag)
     }
     
@@ -134,6 +151,7 @@ struct LoginInput: ViewToViewModelInput {
     let login: Signal<Void>
     let showState: Driver<Int>
     let getCode: Signal<Void>
+    let registeAction: Signal<Void>
     init(view: MVVMView) {
         
         let view = view as! LoginViewController
@@ -148,5 +166,6 @@ struct LoginInput: ViewToViewModelInput {
         registerCode = view.rCodeField.rx.text.orEmpty.asDriver()
         registerPass = view.rPassField.rx.text.orEmpty.asDriver()
         getCode = view.getCodeBtn.rx.tap.asSignal()
+        registeAction = view.registerActionBtn.rx.tap.asSignal()
     }
 }

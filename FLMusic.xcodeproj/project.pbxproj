@@ -18,11 +18,18 @@
 		122FC21721F20009007E520B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20721F20008007E520B /* NetworkManager.swift */; };
 		122FC21821F20009007E520B /* MVVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20921F20008007E520B /* MVVM.swift */; };
 		122FC21921F20009007E520B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20B21F20008007E520B /* BaseViewController.swift */; };
-		122FC21A21F20009007E520B /* UIImage+FLCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20D21F20008007E520B /* UIImage+FLCommon.swift */; };
-		122FC21B21F20009007E520B /* UIView+FLCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20E21F20008007E520B /* UIView+FLCommon.swift */; };
+		122FC21A21F20009007E520B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20D21F20008007E520B /* UIImageExtension.swift */; };
+		122FC21B21F20009007E520B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20E21F20008007E520B /* UIViewExtension.swift */; };
 		122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC21121F20009007E520B /* LoginViewModel.swift */; };
 		122FC21D21F20009007E520B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC21321F20009007E520B /* LoginViewController.swift */; };
 		4D6EC8C63F841AD9C0D02A87 /* Pods_FLMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B184C85B005BD17D17F6B /* Pods_FLMusic.framework */; };
+		9845FA2321F6C4D800792E16 /* CommonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2221F6C4D800792E16 /* CommonTool.swift */; };
+		9845FA2B21F8451C00792E16 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2A21F8451C00792E16 /* FindViewController.swift */; };
+		9845FA2D21F8472B00792E16 /* FLSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2C21F8472B00792E16 /* FLSearchView.swift */; };
+		9845FA2F21F84B0600792E16 /* FindViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2E21F84B0600792E16 /* FindViewModel.swift */; };
+		9845FA3121F84DB000792E16 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3021F84DB000792E16 /* BaseNavigationController.swift */; };
+		9845FA3321F8518E00792E16 /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3221F8518E00792E16 /* FLColors.swift */; };
+		9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3421F86FE900792E16 /* MyTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,13 +46,20 @@
 		122FC20721F20008007E520B /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		122FC20921F20008007E520B /* MVVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVVM.swift; sourceTree = "<group>"; };
 		122FC20B21F20008007E520B /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		122FC20D21F20008007E520B /* UIImage+FLCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+FLCommon.swift"; sourceTree = "<group>"; };
-		122FC20E21F20008007E520B /* UIView+FLCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+FLCommon.swift"; sourceTree = "<group>"; };
+		122FC20D21F20008007E520B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		122FC20E21F20008007E520B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		122FC21121F20009007E520B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		122FC21321F20009007E520B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1EC4E59D4B483160DCC2D70D /* Pods-FLMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLMusic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic.debug.xcconfig"; sourceTree = "<group>"; };
 		5A5B184C85B005BD17D17F6B /* Pods_FLMusic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLMusic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C25EE9AF1AEA0E7EDC77D84 /* Pods-FLMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLMusic.release.xcconfig"; path = "Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic.release.xcconfig"; sourceTree = "<group>"; };
+		9845FA2221F6C4D800792E16 /* CommonTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTool.swift; sourceTree = "<group>"; };
+		9845FA2A21F8451C00792E16 /* FindViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewController.swift; sourceTree = "<group>"; };
+		9845FA2C21F8472B00792E16 /* FLSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLSearchView.swift; sourceTree = "<group>"; };
+		9845FA2E21F84B0600792E16 /* FindViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindViewModel.swift; sourceTree = "<group>"; };
+		9845FA3021F84DB000792E16 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		9845FA3221F8518E00792E16 /* FLColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColors.swift; sourceTree = "<group>"; };
+		9845FA3421F86FE900792E16 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +95,7 @@
 		122FC1EC21F1FEE5007E520B /* FLMusic */ = {
 			isa = PBXGroup;
 			children = (
+				9845FA2421F844AA00792E16 /* Find */,
 				122FC20F21F20009007E520B /* Login */,
 				122FC20321F20008007E520B /* Other */,
 				122FC1FF21F20008007E520B /* Src */,
@@ -116,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				122FC20421F20008007E520B /* FLConst.swift */,
+				9845FA3221F8518E00792E16 /* FLColors.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -127,6 +143,7 @@
 				122FC20821F20008007E520B /* RxSwift+MVVM */,
 				122FC20A21F20008007E520B /* CommonUI */,
 				122FC20C21F20008007E520B /* Categorys */,
+				9845FA2221F6C4D800792E16 /* CommonTool.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -151,6 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				122FC20B21F20008007E520B /* BaseViewController.swift */,
+				9845FA2C21F8472B00792E16 /* FLSearchView.swift */,
+				9845FA3021F84DB000792E16 /* BaseNavigationController.swift */,
+				9845FA3421F86FE900792E16 /* MyTabBarController.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -158,8 +178,8 @@
 		122FC20C21F20008007E520B /* Categorys */ = {
 			isa = PBXGroup;
 			children = (
-				122FC20D21F20008007E520B /* UIImage+FLCommon.swift */,
-				122FC20E21F20008007E520B /* UIView+FLCommon.swift */,
+				122FC20D21F20008007E520B /* UIImageExtension.swift */,
+				122FC20E21F20008007E520B /* UIViewExtension.swift */,
 			);
 			path = Categorys;
 			sourceTree = "<group>";
@@ -187,6 +207,47 @@
 				122FC21321F20009007E520B /* LoginViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9845FA2421F844AA00792E16 /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				9845FA2921F844E400792E16 /* ViewModels */,
+				9845FA2721F844CC00792E16 /* Models */,
+				9845FA2621F844C400792E16 /* Views */,
+				9845FA2521F844B800792E16 /* ViewControllers */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		9845FA2521F844B800792E16 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9845FA2A21F8451C00792E16 /* FindViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9845FA2621F844C400792E16 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9845FA2721F844CC00792E16 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9845FA2921F844E400792E16 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9845FA2E21F84B0600792E16 /* FindViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		C637A7C55388A237AFF24115 /* Frameworks */ = {
@@ -291,6 +352,7 @@
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Hue/Hue.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
@@ -311,6 +373,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hue.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
@@ -356,16 +419,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9845FA2321F6C4D800792E16 /* CommonTool.swift in Sources */,
 				122FC21721F20009007E520B /* NetworkManager.swift in Sources */,
 				122FC21821F20009007E520B /* MVVM.swift in Sources */,
 				122FC1F021F1FEE5007E520B /* ViewController.swift in Sources */,
 				122FC21621F20009007E520B /* FLConst.swift in Sources */,
 				122FC1EE21F1FEE5007E520B /* AppDelegate.swift in Sources */,
-				122FC21A21F20009007E520B /* UIImage+FLCommon.swift in Sources */,
+				9845FA2D21F8472B00792E16 /* FLSearchView.swift in Sources */,
+				122FC21A21F20009007E520B /* UIImageExtension.swift in Sources */,
+				9845FA3121F84DB000792E16 /* BaseNavigationController.swift in Sources */,
 				122FC21921F20009007E520B /* BaseViewController.swift in Sources */,
-				122FC21B21F20009007E520B /* UIView+FLCommon.swift in Sources */,
+				9845FA2F21F84B0600792E16 /* FindViewModel.swift in Sources */,
+				122FC21B21F20009007E520B /* UIViewExtension.swift in Sources */,
 				122FC21D21F20009007E520B /* LoginViewController.swift in Sources */,
+				9845FA3321F8518E00792E16 /* FLColors.swift in Sources */,
 				122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */,
+				9845FA2B21F8451C00792E16 /* FindViewController.swift in Sources */,
+				9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,11 +19,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = .white
         
-        let login = UIStoryboard(name: "Login", bundle: nil)
-        window?.rootViewController = login.instantiateInitialViewController()
-        
+        setting()
+        if let token = getToken() {
+            NetworkManager.instance.token = token
+            
+            
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            window?.rootViewController = main.instantiateInitialViewController()
+        } else {
+            
+            let login = UIStoryboard(name: "Login", bundle: nil)
+            window?.rootViewController = login.instantiateInitialViewController()
+        }
         window?.makeKeyAndVisible()
+        
         return true
+    }
+    
+    func setting() {
+        UISetting()
+        otherSetting()
+    }
+    
+    func UISetting() {
+        
+        UINavigationBar.appearance().barTintColor = kSecondTintColor
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white, .font : kBFont(size: 16)]
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: kNFont(size: 16), .foregroundColor: UIColor.white], for: .normal)
+    }
+    
+    func otherSetting() {
+        
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

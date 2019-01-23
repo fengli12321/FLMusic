@@ -23,7 +23,7 @@ class LoginViewModel: MVVMViewModel {
         let request = NetworkManager.request(NetService.smsCode(mobile: mobile))
         return request.map({ (data) -> String in
             
-            HUD.hide()
+            HUD.flash(.labeledSuccess(title: "恭喜", subtitle: "注册成功"), delay: 1)
             return data["code"].stringValue
         }).asDriver(onErrorRecover: { (error) in
             
@@ -32,19 +32,55 @@ class LoginViewModel: MVVMViewModel {
             return Driver.empty()
         })
     }
+    
+    // 注册
+    func register(user: String, code: String, pass: String) -> Driver<(Bool, String?)> {
+        HUD.show(.labeledProgress(title: nil, subtitle: "注册中"))
+        return NetworkManager.request(NetService.register(mobile: user, password: pass, code: code))
+            .map({ (data) in
+                
+                HUD.hide()
+                return (true, nil)
+            })
+            .asDriver(onErrorRecover: { (error) in
+                let error = error as! APIError
+                return Driver.just((false, error.msg))
+            })
+        
+    }
+    
+    // 登录
+    func login(user: String, pass: String) -> Driver<(Bool, String?)> {
+        HUD.show(.labeledProgress(title: nil, subtitle: "登录中"))
+        return NetworkManager.request(.login(username: user, password: pass))
+            .map({ (data) in
+                HUD.hide()
+                let token = String(format: "JWT %@", data["token"].stringValue)
+                saveToken(token: token)
+                NetworkManager.instance.token = token
+                return (true, nil)
+            })
+            .asDriver(onErrorRecover: { (error)in
+                let error = error as! APIError
+                return Driver.just((false, error.msg))
+            })
+    }
 }
 
 struct LoginOutput: ViewModelToViewOutput {
     
-    var errorInfo: Driver<String>
-    var loginEnable: Driver<Bool>
-    var registerEnable: Driver<Bool>
+    let errorInfo: Driver<String>
+    let loginEnable: Driver<Bool>
+    let registerEnable: Driver<Bool>
     
-    var getCodeEnable: Driver<Bool>
-    var getCodeText: Driver<String>
-    var getCodeValue: Driver<String>
+    let getCodeEnable: Driver<Bool>
+    let getCodeText: Driver<String>
+    let getCodeValue: Driver<String>
     
-    var requestError = PublishSubject<String>()
+    let requestError = PublishSubject<String>()
+    
+    let registeSuccess: Driver<(Bool, String?)>
+    let loginSuccess: Driver<(Bool, String?)>
     init(viewModel: MVVMViewModel) {
         
         let viewModel = viewModel as! LoginViewModel
@@ -94,10 +130,15 @@ struct LoginOutput: ViewModelToViewOutput {
             return user.count == 11
         })
         
+        // 获取到的验证码
+        getCodeValue = input.getCode.withLatestFrom(input.registerUser).flatMapLatest({ user in
+            return viewModel.getCodeAction(mobile: user)
+        })
+        
         
         // 倒计时
-        let timeDuration = 5
-        let timer: Driver<Int> = input.getCode.flatMapLatest { _ -> Driver<Int> in
+        let timeDuration = 60
+        let timer: Driver<Int> = getCodeValue.flatMapLatest { _ -> Driver<Int> in
             Observable.timer(0, period: 1, scheduler: MainScheduler.instance)
                 .take(timeDuration)
                 .asDriver(onErrorJustReturn: 0)
@@ -127,8 +168,18 @@ struct LoginOutput: ViewModelToViewOutput {
         
         
         
-        getCodeValue = input.getCode.withLatestFrom(input.registerUser).flatMapLatest({ user in
-            return viewModel.getCodeAction(mobile: user)
+        
+        // 注册成功
+        let values = Driver.combineLatest(input.registerUser, input.registerCode, input.registerPass)
+        registeSuccess = input.registeAction.withLatestFrom(values).flatMapLatest({ (user, code, pass)  in
+            return viewModel.register(user: user, code: code, pass: pass)
+        })
+        
+        // 登录成功
+        let lValues = Driver.combineLatest(input.loginUser, input.loginPass)
+        loginSuccess = input.login.withLatestFrom(lValues).flatMapLatest({ (user, pass) in
+            
+            return viewModel.login(user: user, pass: pass)
         })
     }
 }

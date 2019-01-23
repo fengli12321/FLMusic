@@ -21,13 +21,14 @@ class NetworkManager: NSObject {
     
     static let instance = NetworkManager()
     
-    
+    var token: String?
 
     let provider: MoyaProvider<NetService>
     
     static func request(_ service: NetService) -> Single<JSON> {
         
         return instance.provider.rx.request(service).filterSuccessfulStatusCodes().catchError({ (error)  in
+            
             
             if let error = error as? MoyaError {
                 
@@ -48,17 +49,21 @@ class NetworkManager: NSObject {
                     
                     if let data = try? JSON(data: response.data) {
                         
-                        var errors = data["errors"]
-                        if errors.count > 1 {
-                            print("错误数量大于1")
-                        }
-                        throw APIError(code: response.statusCode, msg: errors[0]["detail"].stringValue)
+                        let error = data["error"]
+                        throw APIError(code: response.statusCode, msg: error.stringValue)
                     } else {
                         errorDesc = "status error"
                     
                     }
-                case .underlying(_, _):
-                    errorDesc = "其他错误（超时等）"
+                case .underlying(let error, _):
+                    
+                    let code = error._code
+                    if code == -1001 {
+                        errorDesc = "请求超时"
+                    } else {
+                        
+                        errorDesc = "其他错误"
+                    }
                 case .requestMapping(_):
                     errorDesc = "请求错误"
                 case .parameterEncoding(_):
@@ -74,7 +79,7 @@ class NetworkManager: NSObject {
             
             if let data = try? JSON(data: response.data){
                 
-                return data["data"]
+                return data
             } else {
             
                 throw APIError(code: -1, msg: "服务器参数错误")
@@ -90,7 +95,7 @@ class NetworkManager: NSObject {
         let requestClosure = { (endpoint: Endpoint, closure: MoyaProvider.RequestResultClosure) in
             do {
                 var urlRequest = try endpoint.urlRequest()
-                urlRequest.timeoutInterval = 1
+                urlRequest.timeoutInterval = 15
                 closure(.success(urlRequest))
             } catch MoyaError.requestMapping(let url) {
                 closure(.failure(MoyaError.requestMapping(url)))
@@ -110,6 +115,7 @@ class NetworkManager: NSObject {
 enum NetService {
     case smsCode(mobile: String)
     case register(mobile: String, password: String, code: String)
+    case login(username: String, password: String)
 }
 
 extension NetService: TargetType {
@@ -124,12 +130,15 @@ extension NetService: TargetType {
             return "getsmscode/"
         case .register:
             return "register/"
+        case .login:
+            return "login/"
         }
+    
     }
     
     var method: Moya.Method {
         switch self {
-        case .smsCode, .register:
+        case .smsCode, .register, .login:
             return .post
         }
     }
@@ -144,6 +153,9 @@ extension NetService: TargetType {
             return .requestParameters(parameters: ["mobile" : mobile, "password" : password, "code" : code], encoding: URLEncoding.default)
         case .smsCode(let mobile):
             return .requestParameters(parameters: ["mobile" : mobile], encoding: URLEncoding.default)
+            
+        case let .login(username, password):
+            return .requestParameters(parameters: ["username": username, "password": password], encoding: URLEncoding.default)
         }
     }
     
