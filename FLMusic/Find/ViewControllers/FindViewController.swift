@@ -23,7 +23,7 @@ class FindViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     }
     override func createUI() {
         
-        
+        self.navigationItem.title = "Music"
     }
 
 
@@ -36,7 +36,7 @@ class FindViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.backgroundColor = kMainTintColor
+        cell.backgroundColor = kSecondTintColor
         
         return cell
     }

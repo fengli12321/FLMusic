@@ -54,7 +54,7 @@ class BaseViewController: MVVMView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor(hex: "#F9F9F9")
+        self.view.backgroundColor = kSecondTintColor
         self.translucentNav = false
         self.rightSwipeEnable = true
         self.hiddenBack = false
