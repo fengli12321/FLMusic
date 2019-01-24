@@ -47,6 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white, .font : kBFont(size: 16)]
         UIBarButtonItem.appearance().setTitleTextAttributes([.font: kNFont(size: 16), .foregroundColor: UIColor.white], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : kButtonTintColor], for: .selected)
     }
     
     func otherSetting() {

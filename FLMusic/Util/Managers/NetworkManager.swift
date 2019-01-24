@@ -120,7 +120,7 @@ enum NetService {
 
 extension NetService: TargetType {
     var baseURL: URL {
-        let urlStr = "http://172.30.15.49:8000"
+        let urlStr = "http://192.168.199.121:8000"
         return URL(string: urlStr)!
     }
     

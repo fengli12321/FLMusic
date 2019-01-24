@@ -24,6 +24,8 @@ class FindViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     override func createUI() {
         
         self.navigationItem.title = "Music"
+        self.tableView.backgroundColor = kSecondTintColor
+        self.tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 15))
     }
 
 
