@@ -13,6 +13,7 @@ target 'FLMusic' do
  pod 'SwiftyJSON' # json 解析
  pod 'PKHUD'
  pod 'KeychainAccess' # keychain
+ pod 'MJRefresh' # 列表刷新
  # rx
  pod 'RxSwift'
  pod 'RxCocoa'

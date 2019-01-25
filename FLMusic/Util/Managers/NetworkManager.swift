@@ -116,11 +116,12 @@ enum NetService {
     case smsCode(mobile: String)
     case register(mobile: String, password: String, code: String)
     case login(username: String, password: String)
+    case findList
 }
 
 extension NetService: TargetType {
     var baseURL: URL {
-        let urlStr = "http://192.168.199.121:8000"
+        let urlStr = "http://172.30.15.49:8000"
         return URL(string: urlStr)!
     }
     
@@ -132,6 +133,8 @@ extension NetService: TargetType {
             return "register/"
         case .login:
             return "login/"
+        case .findList:
+            return "musics/"
         }
     
     }
@@ -140,7 +143,10 @@ extension NetService: TargetType {
         switch self {
         case .smsCode, .register, .login:
             return .post
+        case .findList:
+            return .get
         }
+    
     }
     
     var sampleData: Data {
@@ -156,6 +162,8 @@ extension NetService: TargetType {
             
         case let .login(username, password):
             return .requestParameters(parameters: ["username": username, "password": password], encoding: URLEncoding.default)
+        case .findList:
+            return .requestPlain
         }
     }
     

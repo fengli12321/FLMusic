@@ -23,7 +23,6 @@
 		122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC21121F20009007E520B /* LoginViewModel.swift */; };
 		122FC21D21F20009007E520B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC21321F20009007E520B /* LoginViewController.swift */; };
 		12DF2F7021F9E17500939437 /* FindListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF2F6E21F9E17500939437 /* FindListCell.swift */; };
-		12DF2F7121F9E17500939437 /* FindListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12DF2F6F21F9E17500939437 /* FindListCell.xib */; };
 		4D6EC8C63F841AD9C0D02A87 /* Pods_FLMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B184C85B005BD17D17F6B /* Pods_FLMusic.framework */; };
 		9845FA2321F6C4D800792E16 /* CommonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2221F6C4D800792E16 /* CommonTool.swift */; };
 		9845FA2B21F8451C00792E16 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2A21F8451C00792E16 /* FindViewController.swift */; };
@@ -32,6 +31,7 @@
 		9845FA3121F84DB000792E16 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3021F84DB000792E16 /* BaseNavigationController.swift */; };
 		9845FA3321F8518E00792E16 /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3221F8518E00792E16 /* FLColors.swift */; };
 		9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3421F86FE900792E16 /* MyTabBarController.swift */; };
+		9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3621FAA14000792E16 /* FLToastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,6 @@
 		122FC21121F20009007E520B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		122FC21321F20009007E520B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		12DF2F6E21F9E17500939437 /* FindListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindListCell.swift; sourceTree = "<group>"; };
-		12DF2F6F21F9E17500939437 /* FindListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FindListCell.xib; sourceTree = "<group>"; };
 		1EC4E59D4B483160DCC2D70D /* Pods-FLMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLMusic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic.debug.xcconfig"; sourceTree = "<group>"; };
 		5A5B184C85B005BD17D17F6B /* Pods_FLMusic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLMusic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C25EE9AF1AEA0E7EDC77D84 /* Pods-FLMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLMusic.release.xcconfig"; path = "Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic.release.xcconfig"; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		9845FA3021F84DB000792E16 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		9845FA3221F8518E00792E16 /* FLColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColors.swift; sourceTree = "<group>"; };
 		9845FA3421F86FE900792E16 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		9845FA3621FAA14000792E16 /* FLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLToastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +171,7 @@
 		122FC20A21F20008007E520B /* CommonUI */ = {
 			isa = PBXGroup;
 			children = (
+				9845FA3621FAA14000792E16 /* FLToastView.swift */,
 				122FC20B21F20008007E520B /* BaseViewController.swift */,
 				9845FA2C21F8472B00792E16 /* FLSearchView.swift */,
 				9845FA3021F84DB000792E16 /* BaseNavigationController.swift */,
@@ -236,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				12DF2F6E21F9E17500939437 /* FindListCell.swift */,
-				12DF2F6F21F9E17500939437 /* FindListCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -335,7 +335,6 @@
 			files = (
 				122FC21421F20009007E520B /* login_bg3.jpg in Resources */,
 				122FC1F821F1FEE6007E520B /* LaunchScreen.storyboard in Resources */,
-				12DF2F7121F9E17500939437 /* FindListCell.xib in Resources */,
 				122FC1F521F1FEE6007E520B /* Assets.xcassets in Resources */,
 				122FC21521F20009007E520B /* Login.storyboard in Resources */,
 				122FC1F321F1FEE5007E520B /* Main.storyboard in Resources */,
@@ -353,7 +352,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-FLMusic/Pods-FLMusic-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
@@ -361,6 +360,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -382,6 +382,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -394,7 +395,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FLMusic/Pods-FLMusic-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ACC38B1ED0717D8F29B59E52 /* [CP] Check Pods Manifest.lock */ = {
@@ -439,6 +440,7 @@
 				122FC21921F20009007E520B /* BaseViewController.swift in Sources */,
 				9845FA2F21F84B0600792E16 /* FindViewModel.swift in Sources */,
 				122FC21B21F20009007E520B /* UIViewExtension.swift in Sources */,
+				9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */,
 				122FC21D21F20009007E520B /* LoginViewController.swift in Sources */,
 				9845FA3321F8518E00792E16 /* FLColors.swift in Sources */,
 				122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */,

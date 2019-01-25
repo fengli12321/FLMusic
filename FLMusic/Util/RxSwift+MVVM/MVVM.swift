@@ -10,7 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-
+typealias RequstData<T> = (success: Bool, data: T)
 
 // MARK: Protocol
 protocol ViewToViewModelInput {

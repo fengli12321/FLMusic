@@ -6,6 +6,7 @@ PODS:
   - IQKeyboardManagerSwift (6.2.0)
   - KeychainAccess (3.1.2)
   - Kingfisher (4.10.1)
+  - MJRefresh (3.1.15.7)
   - Moya (12.0.1):
     - Moya/Core (= 12.0.1)
   - Moya/Core (12.0.1):
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KeychainAccess
   - Kingfisher
+  - MJRefresh
   - Moya
   - Moya/RxSwift
   - PKHUD
@@ -52,6 +54,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - KeychainAccess
     - Kingfisher
+    - MJRefresh
     - Moya
     - PKHUD
     - Result
@@ -70,6 +73,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   KeychainAccess: b3816fddcf28aa29d94b10ec305cd52be14c472b
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   Moya: cf730b3cd9e005401ef37a85143aa141a12fd38f
   PKHUD: 4e6162c4c39ac367c6934e9855c6b4762ee16256
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
@@ -80,6 +84,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 5c32cbb37be67f214b95daaed86557a624cf1f5d
+PODFILE CHECKSUM: b50418638dd4d567d5424797620d03f21c914269
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.6.0.beta.2

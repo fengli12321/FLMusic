@@ -108,7 +108,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GeO-E0-brl">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GeO-E0-brl">
                                                     <rect key="frame" x="25" y="0.0" width="70" height="70"/>
                                                     <color key="backgroundColor" red="0.2156862745" green="0.59215686270000001" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -132,12 +132,14 @@
                                                 <constraint firstItem="Ltl-Th-Qeu" firstAttribute="top" secondItem="clg-V9-f0H" secondAttribute="top" constant="20" id="l6v-5P-yt5"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="albumLabel" destination="bQI-KE-iD9" id="KfE-tX-ef4"/>
+                                            <outlet property="frontImageView" destination="GeO-E0-brl" id="P1E-ja-e2y"/>
+                                            <outlet property="musicNameLabel" destination="7pD-5s-FHO" id="nTI-xT-czq"/>
+                                            <outlet property="singerLabel" destination="BCB-O3-V0A" id="e66-jx-HUV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="J8D-dr-w94" id="6ur-ly-qbt"/>
-                                    <outlet property="delegate" destination="J8D-dr-w94" id="KJW-o0-CqD"/>
-                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -178,43 +180,14 @@
         <!--hello-->
         <scene sceneID="MG3-AG-xuK">
             <objects>
-                <viewController title="hello" id="BfW-Qa-vKT" customClass="FindViewController" customModule="FLMusic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="hello" id="BfW-Qa-vKT" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VFZ-Ym-ZCY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lau-D9-bax">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.1058823529" green="0.10980392160000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="TE4-eS-PWy">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TE4-eS-PWy" id="tbt-wB-Rhm">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="BfW-Qa-vKT" id="toe-vc-On1"/>
-                                    <outlet property="delegate" destination="BfW-Qa-vKT" id="hMg-iG-ofI"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Lau-D9-bax" firstAttribute="leading" secondItem="uK2-pX-SKy" secondAttribute="leading" id="5PM-9F-rhx"/>
-                            <constraint firstItem="Lau-D9-bax" firstAttribute="top" secondItem="VFZ-Ym-ZCY" secondAttribute="top" id="AMz-XU-f0B"/>
-                            <constraint firstAttribute="bottom" secondItem="Lau-D9-bax" secondAttribute="bottom" id="G63-8c-mmG"/>
-                            <constraint firstItem="uK2-pX-SKy" firstAttribute="trailing" secondItem="Lau-D9-bax" secondAttribute="trailing" id="ijB-Yd-gZ9"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uK2-pX-SKy"/>
                     </view>
                     <navigationItem key="navigationItem" id="gui-FU-uMR"/>
-                    <connections>
-                        <outlet property="tableView" destination="Lau-D9-bax" id="7TU-Y5-WXd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5r-Il-rX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,43 +213,14 @@
         <!--hello-->
         <scene sceneID="mZZ-2a-1OZ">
             <objects>
-                <viewController title="hello" id="FQ8-xe-Zgw" customClass="FindViewController" customModule="FLMusic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="hello" id="FQ8-xe-Zgw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eQn-sN-WNJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qgr-Ll-r9t">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.1058823529" green="0.10980392160000001" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="8pw-22-jor">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8pw-22-jor" id="lCH-S7-jyh">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="FQ8-xe-Zgw" id="uKe-Ew-yuY"/>
-                                    <outlet property="delegate" destination="FQ8-xe-Zgw" id="ts6-PR-D2g"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="T7q-H3-jcD" firstAttribute="trailing" secondItem="Qgr-Ll-r9t" secondAttribute="trailing" id="Rbk-ZO-rL8"/>
-                            <constraint firstItem="Qgr-Ll-r9t" firstAttribute="leading" secondItem="T7q-H3-jcD" secondAttribute="leading" id="svH-d7-JL7"/>
-                            <constraint firstItem="Qgr-Ll-r9t" firstAttribute="top" secondItem="eQn-sN-WNJ" secondAttribute="top" id="x4U-V4-EFv"/>
-                            <constraint firstAttribute="bottom" secondItem="Qgr-Ll-r9t" secondAttribute="bottom" id="zXE-Sk-FS4"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="T7q-H3-jcD"/>
                     </view>
                     <navigationItem key="navigationItem" id="h5J-Fv-9jQ"/>
-                    <connections>
-                        <outlet property="tableView" destination="Qgr-Ll-r9t" id="N49-Oh-dUz"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="94V-JA-hAL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

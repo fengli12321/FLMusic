@@ -9,7 +9,11 @@
 import UIKit
 
 class FindListCell: UITableViewCell {
-
+    @IBOutlet weak var frontImageView: UIImageView!
+    @IBOutlet weak var musicNameLabel: UILabel!
+    @IBOutlet weak var singerLabel: UILabel!
+    @IBOutlet weak var albumLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
