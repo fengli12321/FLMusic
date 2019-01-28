@@ -42,9 +42,15 @@ class FindViewController: BaseViewController, UITableViewDelegate {
         refreshHeader?.activityIndicatorViewStyle = .white
         tableView.mj_header = refreshHeader
         
+        tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: { [unowned self] in
+            self.loadMore.onNext(())
+        })
+        
+        
+        tableView.mj_header.beginRefreshing()
     }
     
-    override func provideType() -> MVVMViewModel.Type? {
+    override func provideViewModelType() -> MVVMViewModel.Type? {
         return FindViewModel.self
     }
     
@@ -59,6 +65,10 @@ class FindViewController: BaseViewController, UITableViewDelegate {
             cell.singerLabel.text = model.singer
             cell.albumLabel.text = model.album
         }.disposed(by: disposeBag)
+        
+        
+        output.refreshStatus.bind(to: self.tableView.rx.refreshStatus).disposed(by: disposeBag)
+        
     }
 
     

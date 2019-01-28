@@ -61,7 +61,7 @@ class LoginViewController: BaseViewController {
         }).disposed(by: disposeBag)
     }
 
-    override func provideType() -> MVVMViewModel.Type? {
+    override func provideViewModelType() -> MVVMViewModel.Type? {
         return LoginViewModel.self
     }
     

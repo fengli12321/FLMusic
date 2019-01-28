@@ -27,6 +27,7 @@ class NetworkManager: NSObject {
     
     static func request(_ service: NetService) -> Single<JSON> {
         
+        print("request:\(service.path) ===\n  params:\(service.task)")
         return instance.provider.rx.request(service).filterSuccessfulStatusCodes().catchError({ (error)  in
             
             
@@ -116,12 +117,12 @@ enum NetService {
     case smsCode(mobile: String)
     case register(mobile: String, password: String, code: String)
     case login(username: String, password: String)
-    case findList
+    case findList(page: Int)
 }
 
 extension NetService: TargetType {
     var baseURL: URL {
-        let urlStr = "http://172.30.15.49:8000"
+        let urlStr = "http://192.168.8.117:8000"
         return URL(string: urlStr)!
     }
     
@@ -162,8 +163,8 @@ extension NetService: TargetType {
             
         case let .login(username, password):
             return .requestParameters(parameters: ["username": username, "password": password], encoding: URLEncoding.default)
-        case .findList:
-            return .requestPlain
+        case .findList(let page):
+            return .requestParameters(parameters: ["page" : page], encoding: URLEncoding.default)
         }
     }
     

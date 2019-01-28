@@ -42,16 +42,17 @@ protocol ViewModelToViewOutputProvider {
 
 extension ViewModelToViewOutputProvider where Self: MVVMViewModel {
     func provideOutput() -> ViewModelToViewOutput? {
-        return self.outputType?.init(viewModel: self)
+        let output = self.outputType?.init(viewModel: self)
+        self.output = output
+        return output
     }
 }
 
 // MARK: View & ViewModel
 class MVVMView: UIViewController, ViewToViewModelInputProvider {
     
-    
     private var viewModelType: MVVMViewModel.Type?
-    private(set) var router: Router!
+//    private(set) var router: Router!
     var viewModel: MVVMViewModel?
     var inputType: ViewToViewModelInput.Type? { return nil }
     var receive: Driver<Any>?
@@ -59,20 +60,20 @@ class MVVMView: UIViewController, ViewToViewModelInputProvider {
     required init(_ viewModelType: MVVMViewModel.Type?) {
         self.viewModelType = viewModelType
         super.init(nibName: nil, bundle: nil)
-        self.router = Router(from: self)
+//        self.router = Router(from: self)
     }
     
     required init?(coder aDecoder: NSCoder) {
         
         super.init(coder: aDecoder)
-        self.router = Router(from: self)
+//        self.router = Router(from: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        if let viewModeType = provideType() {
+        if let viewModeType = provideViewModelType() {
             
             self.viewModelType = viewModeType
         }
@@ -85,7 +86,7 @@ class MVVMView: UIViewController, ViewToViewModelInputProvider {
         }
     }
     
-    func provideType() -> MVVMViewModel.Type? {
+    func provideViewModelType() -> MVVMViewModel.Type? {
         return nil
     }
     
@@ -99,96 +100,135 @@ class MVVMView: UIViewController, ViewToViewModelInputProvider {
 
 class MVVMViewModel: NSObject, ViewModelToViewOutputProvider {
     let input: ViewToViewModelInput
+    var output: ViewModelToViewOutput!
     var outputType: ViewModelToViewOutput.Type? { return nil }
     required init(input: ViewToViewModelInput) {
         self.input = input
     }
 }
 
-
-
-struct MVVMUnit {
-    let viewType: MVVMView.Type
-    let viewModelType: MVVMViewModel.Type
+enum RefreshStatus {
+    case none
+    case beingHeaderRefresh
+    case endHeaderRefresh
+    case beingFooterRefresh
+    case endFooterRefresh
+    case noMoreData
 }
 
-extension MVVMUnit: ExpressibleByArrayLiteral {
-    typealias ArrayLiteralElement = AnyClass
+
+extension Reactive where Base: UIScrollView {
     
-    init(arrayLiteral elements: ArrayLiteralElement...) {
-        assert(elements.count == 2, "初始化长度错误")
-        let viewType = elements[0] as? MVVMView.Type
-        assert(viewType != nil, "vimeType 错误")
-        let viewModelType = elements[1] as? MVVMViewModel.Type
-        assert(viewModelType != nil, "viewModelType 错误")
-        self.viewType = viewType!
-        self.viewModelType = viewModelType!
-    }
-}
-
-struct MVVMUnitCase: RawRepresentable {
-    typealias RawValue = MVVMUnit
-    let rawValue: MVVMUnit
-    public init(rawValue: RawValue) {
-        self.rawValue = rawValue
-    }
-}
-
-extension MVVMUnitCase {
-    
-}
-
-struct MVVMBinder {
-    static func obtainBindedView(_ unitCase: MVVMUnitCase) -> MVVMView{
-        let unit = unitCase.rawValue
-        let viewType = unit.viewType
-        let viewModelType = unit.viewModelType
-        let view = viewType.init(viewModelType)
-        return view
-    }
-}
-
-enum RouterType {
-    case push(MVVMUnitCase)
-    case present(MVVMUnitCase)
-    case root(MVVMUnitCase)
-    case back
-}
-struct Router {
-    let from: MVVMView
-    init(from: MVVMView) {
-        self.from = from
-    }
-    func route(_ type: RouterType, send: Driver<Any>? = nil) -> Driver<Any>? {
-        switch type {
-       
-        case let .push(unitCase):
-            let view = MVVMBinder.obtainBindedView(unitCase)
-            view.receive = send
-            from.navigationController?.pushViewController(view, animated: true)
-            return view.provideCallBack()
-            
-        case let .present(unitCase):
-            let view = MVVMBinder.obtainBindedView(unitCase)
-            view.receive = send
-            from.present(view, animated: true, completion: nil)
-            return view.provideCallBack()
-            
-        case let .root(unitCase):
-            let view = MVVMBinder.obtainBindedView(unitCase)
-            view.receive = send
-            UIApplication.shared.keyWindow?.rootViewController = view
-            return view.provideCallBack()
-            
-        case .back:
-            if from.presentationController != nil {
-                from.dismiss(animated: true, completion: nil)
-            } else {
-                _ = from.navigationController?.popViewController(animated: true)
+    /// Bindable sink for `text` property.
+    var refreshStatus: Binder<RefreshStatus> {
+        return Binder(self.base) { scrollView, status in
+            switch status {
+                
+            case .none:
+                break
+            case .beingHeaderRefresh:
+                scrollView.mj_header.beginRefreshing()
+            case .endHeaderRefresh:
+                scrollView.mj_header.endRefreshing()
+            case .beingFooterRefresh:
+                scrollView.mj_footer.beginRefreshing()
+            case .endFooterRefresh:
+                scrollView.mj_footer.endRefreshing()
+            case .noMoreData:
+                scrollView.mj_footer.endRefreshingWithNoMoreData()
             }
-            return nil
             
+            if status != .noMoreData {
+                scrollView.mj_footer.resetNoMoreData()
+            }
         }
     }
 }
+
+
+//
+//struct MVVMUnit {
+//    let viewType: MVVMView.Type
+//    let viewModelType: MVVMViewModel.Type
+//}
+//
+//extension MVVMUnit: ExpressibleByArrayLiteral {
+//    typealias ArrayLiteralElement = AnyClass
+//
+//    init(arrayLiteral elements: ArrayLiteralElement...) {
+//        assert(elements.count == 2, "初始化长度错误")
+//        let viewType = elements[0] as? MVVMView.Type
+//        assert(viewType != nil, "vimeType 错误")
+//        let viewModelType = elements[1] as? MVVMViewModel.Type
+//        assert(viewModelType != nil, "viewModelType 错误")
+//        self.viewType = viewType!
+//        self.viewModelType = viewModelType!
+//    }
+//}
+//
+//struct MVVMUnitCase: RawRepresentable {
+//    typealias RawValue = MVVMUnit
+//    let rawValue: MVVMUnit
+//    public init(rawValue: RawValue) {
+//        self.rawValue = rawValue
+//    }
+//}
+
+//extension MVVMUnitCase {
+//
+//}
+//
+//struct MVVMBinder {
+//    static func obtainBindedView(_ unitCase: MVVMUnitCase) -> MVVMView{
+//        let unit = unitCase.rawValue
+//        let viewType = unit.viewType
+//        let viewModelType = unit.viewModelType
+//        let view = viewType.init(viewModelType)
+//        return view
+//    }
+//}
+//
+//enum RouterType {
+//    case push(MVVMUnitCase)
+//    case present(MVVMUnitCase)
+//    case root(MVVMUnitCase)
+//    case back
+//}
+//struct Router {
+//    let from: MVVMView
+//    init(from: MVVMView) {
+//        self.from = from
+//    }
+//    func route(_ type: RouterType, send: Driver<Any>? = nil) -> Driver<Any>? {
+//        switch type {
+//
+//        case let .push(unitCase):
+//            let view = MVVMBinder.obtainBindedView(unitCase)
+//            view.receive = send
+//            from.navigationController?.pushViewController(view, animated: true)
+//            return view.provideCallBack()
+//
+//        case let .present(unitCase):
+//            let view = MVVMBinder.obtainBindedView(unitCase)
+//            view.receive = send
+//            from.present(view, animated: true, completion: nil)
+//            return view.provideCallBack()
+//
+//        case let .root(unitCase):
+//            let view = MVVMBinder.obtainBindedView(unitCase)
+//            view.receive = send
+//            UIApplication.shared.keyWindow?.rootViewController = view
+//            return view.provideCallBack()
+//
+//        case .back:
+//            if from.presentationController != nil {
+//                from.dismiss(animated: true, completion: nil)
+//            } else {
+//                _ = from.navigationController?.popViewController(animated: true)
+//            }
+//            return nil
+//
+//        }
+//    }
+//}
 
