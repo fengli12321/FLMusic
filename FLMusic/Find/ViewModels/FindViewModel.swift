@@ -16,18 +16,17 @@ class FindViewModel: MVVMViewModel{
     
     var datas = [FindListDataType]()
     
-    var page = 0
+    var next: String?
     override var outputType: ViewModelToViewOutput.Type? {
         return FindOutput.self
     }
-    var hasMore = true
     func requestData(_ isMore: Bool) -> Driver<[FindListDataType]> {
         
-        page = isMore ? page + 1 : 1
-        return NetworkManager.request(.findList(page: page)).map({ [unowned self] (data) in
+        let next = isMore ? self.next : nil
+        return NetworkManager.request(.findList(next: next)).map({ [unowned self] (data) in
             
             let results = data["results"]
-            self.hasMore = data["next"].string != nil
+            self.next = data["next"].string
             var datas = [FindListDataType]()
             for index in 0..<results.count {
                 
@@ -44,17 +43,16 @@ class FindViewModel: MVVMViewModel{
             } else {
                 self.datas = datas
             }
+            
             return self.datas
-        }).asDriver(onErrorRecover: { [unowned self] (error) in
+        }).asDriver(onErrorRecover: { (error) in
             
-            
-            self.page = isMore ? self.page - 1 : 0
             _ = FLToastView.show("加载失败")
             return Driver.empty()
         }).do(onCompleted: { [unowned self] in
             
             let output = self.output as! FindOutput
-            output._refreshStatus.onNext(self.hasMore ? (isMore ? .endFooterRefresh : .endHeaderRefresh) : .noMoreData)
+            output._refreshStatus.onNext(self.next != nil ? (isMore ? .endFooterRefresh : .endHeaderRefresh) : .noMoreData)
         })
     }
 }

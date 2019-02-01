@@ -57,6 +57,8 @@ class FindViewController: BaseViewController, UITableViewDelegate {
     override func rxDrive(viewModelOutput: ViewModelToViewOutput) {
         let output = viewModelOutput as! FindOutput
         
+        
+        
         output.dataSource.drive(tableView.rx.items(cellIdentifier: "cell")) { index, model, cell in
 
             let cell = cell as! FindListCell
@@ -68,10 +70,30 @@ class FindViewController: BaseViewController, UITableViewDelegate {
         
         
         output.refreshStatus.bind(to: self.tableView.rx.refreshStatus).disposed(by: disposeBag)
+    
+        tableView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
+            
+            self.performSegue(withIdentifier: "musicPlayer", sender: indexPath)
+        }).disposed(by: disposeBag)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if segue.identifier == "musicPlayer" {
+            
+            
+            let indexPath = sender as! IndexPath
+            let index = indexPath.row
+            let detailVC = segue.destination as! MusicPlayerViewController
+            let viewModel = self.viewModel as! FindViewModel
+            let data = viewModel.datas[index]
+            detailVC.music = data
+            
+        }
     }
 
-    
+
 }
 
 

@@ -32,6 +32,7 @@
 		9845FA3321F8518E00792E16 /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3221F8518E00792E16 /* FLColors.swift */; };
 		9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3421F86FE900792E16 /* MyTabBarController.swift */; };
 		9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3621FAA14000792E16 /* FLToastView.swift */; };
+		98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		9845FA3221F8518E00792E16 /* FLColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColors.swift; sourceTree = "<group>"; };
 		9845FA3421F86FE900792E16 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		9845FA3621FAA14000792E16 /* FLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLToastView.swift; sourceTree = "<group>"; };
+		98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				9845FA2A21F8451C00792E16 /* FindViewController.swift */,
+				98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				122FC21621F20009007E520B /* FLConst.swift in Sources */,
 				122FC1EE21F1FEE5007E520B /* AppDelegate.swift in Sources */,
 				9845FA2D21F8472B00792E16 /* FLSearchView.swift in Sources */,
+				98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */,
 				122FC21A21F20009007E520B /* UIImageExtension.swift in Sources */,
 				12DF2F7021F9E17500939437 /* FindListCell.swift in Sources */,
 				9845FA3121F84DB000792E16 /* BaseNavigationController.swift in Sources */,

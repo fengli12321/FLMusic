@@ -117,7 +117,7 @@ enum NetService {
     case smsCode(mobile: String)
     case register(mobile: String, password: String, code: String)
     case login(username: String, password: String)
-    case findList(page: Int)
+    case findList(next: String?)
 }
 
 extension NetService: TargetType {
@@ -163,8 +163,13 @@ extension NetService: TargetType {
             
         case let .login(username, password):
             return .requestParameters(parameters: ["username": username, "password": password], encoding: URLEncoding.default)
-        case .findList(let page):
-            return .requestParameters(parameters: ["page" : page], encoding: URLEncoding.default)
+        case .findList(let next):
+            if let next = next {
+                
+                return .requestParameters(parameters: ["cursor" : next], encoding: URLEncoding.default)
+            } else {
+                return .requestPlain
+            }
         }
     }
     
