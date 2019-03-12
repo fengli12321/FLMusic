@@ -14,6 +14,8 @@ target 'FLMusic' do
  pod 'PKHUD'
  pod 'KeychainAccess' # keychain
  pod 'MJRefresh' # 列表刷新
+ 
+ pod 'SDCycleScrollView' # 轮播
  # rx
  pod 'RxSwift'
  pod 'RxCocoa'

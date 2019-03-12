@@ -22,7 +22,6 @@
 		122FC21B21F20009007E520B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC20E21F20008007E520B /* UIViewExtension.swift */; };
 		122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC21121F20009007E520B /* LoginViewModel.swift */; };
 		122FC21D21F20009007E520B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122FC21321F20009007E520B /* LoginViewController.swift */; };
-		12DF2F7021F9E17500939437 /* FindListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DF2F6E21F9E17500939437 /* FindListCell.swift */; };
 		4D6EC8C63F841AD9C0D02A87 /* Pods_FLMusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5B184C85B005BD17D17F6B /* Pods_FLMusic.framework */; };
 		9845FA2321F6C4D800792E16 /* CommonTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2221F6C4D800792E16 /* CommonTool.swift */; };
 		9845FA2B21F8451C00792E16 /* FindViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA2A21F8451C00792E16 /* FindViewController.swift */; };
@@ -32,6 +31,8 @@
 		9845FA3321F8518E00792E16 /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3221F8518E00792E16 /* FLColors.swift */; };
 		9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3421F86FE900792E16 /* MyTabBarController.swift */; };
 		9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3621FAA14000792E16 /* FLToastView.swift */; };
+		98E8CF7A223770B70049CE1F /* FinderHeaderCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */; };
+		98E8CF7C22378FA70049CE1F /* FindIntemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF7B22378FA70049CE1F /* FindIntemCell.swift */; };
 		98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +54,6 @@
 		122FC20E21F20008007E520B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		122FC21121F20009007E520B /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		122FC21321F20009007E520B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		12DF2F6E21F9E17500939437 /* FindListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindListCell.swift; sourceTree = "<group>"; };
 		1EC4E59D4B483160DCC2D70D /* Pods-FLMusic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLMusic.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic.debug.xcconfig"; sourceTree = "<group>"; };
 		5A5B184C85B005BD17D17F6B /* Pods_FLMusic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FLMusic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C25EE9AF1AEA0E7EDC77D84 /* Pods-FLMusic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FLMusic.release.xcconfig"; path = "Pods/Target Support Files/Pods-FLMusic/Pods-FLMusic.release.xcconfig"; sourceTree = "<group>"; };
@@ -65,6 +65,8 @@
 		9845FA3221F8518E00792E16 /* FLColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColors.swift; sourceTree = "<group>"; };
 		9845FA3421F86FE900792E16 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		9845FA3621FAA14000792E16 /* FLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLToastView.swift; sourceTree = "<group>"; };
+		98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderHeaderCycleView.swift; sourceTree = "<group>"; };
+		98E8CF7B22378FA70049CE1F /* FindIntemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIntemCell.swift; sourceTree = "<group>"; };
 		98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,7 +241,8 @@
 		9845FA2621F844C400792E16 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				12DF2F6E21F9E17500939437 /* FindListCell.swift */,
+				98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */,
+				98E8CF7B22378FA70049CE1F /* FindIntemCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -371,6 +374,8 @@
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDCycleScrollView/SDCycleScrollView.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
@@ -393,6 +398,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDCycleScrollView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -439,7 +446,6 @@
 				9845FA2D21F8472B00792E16 /* FLSearchView.swift in Sources */,
 				98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */,
 				122FC21A21F20009007E520B /* UIImageExtension.swift in Sources */,
-				12DF2F7021F9E17500939437 /* FindListCell.swift in Sources */,
 				9845FA3121F84DB000792E16 /* BaseNavigationController.swift in Sources */,
 				122FC21921F20009007E520B /* BaseViewController.swift in Sources */,
 				9845FA2F21F84B0600792E16 /* FindViewModel.swift in Sources */,
@@ -448,6 +454,8 @@
 				122FC21D21F20009007E520B /* LoginViewController.swift in Sources */,
 				9845FA3321F8518E00792E16 /* FLColors.swift in Sources */,
 				122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */,
+				98E8CF7C22378FA70049CE1F /* FindIntemCell.swift in Sources */,
+				98E8CF7A223770B70049CE1F /* FinderHeaderCycleView.swift in Sources */,
 				9845FA2B21F8451C00792E16 /* FindViewController.swift in Sources */,
 				9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */,
 			);

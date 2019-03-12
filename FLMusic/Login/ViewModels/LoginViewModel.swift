@@ -11,10 +11,115 @@ import RxSwift
 import RxCocoa
 import PKHUD
 
-class LoginViewModel: MVVMViewModel {
-    override var outputType: ViewModelToViewOutput.Type? {
-        return LoginOutput.self
+class LoginViewModel: FLViewModelType {
+      
+    
+    func transform(input: InputType?) -> OutputType? {
+        
+        let input = input as! LoginInput
+        // 输入合法性
+        let errorInfo = Driver.combineLatest(input.loginUser, input.loginPass, input.registerUser, input.registerCode, input.registerPass, input.showState).map { (arg) -> String in
+            
+            
+            
+            let (user, passwd, rUser, rCode, rPass, showState) = arg
+            if showState == 0 {
+                if user.count == 0 {
+                    return "请输入用户名"
+                }
+                if passwd.count == 0 {
+                    return "请输入密码"
+                }
+            } else {
+                if rUser.count == 0 {
+                    return "请输入用户名"
+                }
+                if rCode.count != 6 {
+                    return "请输入正确的验证码"
+                }
+                
+                if rPass.count == 0 {
+                    return "请确认密码"
+                }
+                
+                if rPass.count < 6 {
+                    return "密码强度不足"
+                }
+            }
+            
+            
+            return ""
+        }
+        
+        
+        let loginEnable = errorInfo.map({ (error) in
+            return error.count == 0
+        })
+        
+        let registerEnable = loginEnable
+        
+        // 注册手机号合法
+        let rUserEnable:Driver<Bool> = input.registerUser.map({ (user) -> Bool in
+            return user.count == 11
+        })
+        
+        // 获取到的验证码
+        let getCodeValue = input.getCode.withLatestFrom(input.registerUser).flatMapLatest({ user in
+            return self.getCodeAction(mobile: user)
+        })
+        
+        
+        // 倒计时
+        let timeDuration = 60
+        let timer: Driver<Int> = getCodeValue.flatMapLatest { _ -> Driver<Int> in
+            Observable.timer(0, period: 1, scheduler: MainScheduler.instance)
+                .take(timeDuration)
+                .asDriver(onErrorJustReturn: 0)
+                .map({ (value) -> Int in
+                    return (timeDuration - 1 - Int(value))
+                })
+            }.startWith(0)
+        
+        // 获取验证码按钮有效
+        let getCodeEnable = Driver.combineLatest(rUserEnable, timer).map({ (enable, timerValue) -> Bool in
+            
+            if enable {
+                
+                return timerValue == 0
+            }
+            return false
+        })
+        
+        // 验证码按钮文字
+        let getCodeText = timer.map({ (value) -> String in
+            if value == 0 {
+                return "获取验证码"
+            } else {
+                return "\(value)s后重新获取"
+            }
+        })
+        
+        
+        
+        
+        // 注册成功
+        let values = Driver.combineLatest(input.registerUser, input.registerCode, input.registerPass)
+        let registeSuccess = input.registeAction.withLatestFrom(values).flatMapLatest({ (user, code, pass)  in
+            return self.register(user: user, code: code, pass: pass)
+        })
+        
+        // 登录成功
+        let lValues = Driver.combineLatest(input.loginUser, input.loginPass)
+        let loginSuccess = input.login.withLatestFrom(lValues).flatMapLatest({ (user, pass) in
+            
+            return self.login(user: user, pass: pass)
+        })
+        
+        
+        return LoginOutput(errorInfo: errorInfo, loginEnable: loginEnable, registerEnable: registerEnable, getCodeEnable: getCodeEnable, getCodeText: getCodeText, getCodeValue: getCodeValue, registeSuccess: registeSuccess, loginSuccess: loginSuccess)
     }
+    
+  
     
     // 获取验证码
     func getCodeAction(mobile: String) -> Driver<String> {
@@ -67,8 +172,9 @@ class LoginViewModel: MVVMViewModel {
     }
 }
 
-struct LoginOutput: ViewModelToViewOutput {
-    
+
+
+struct LoginOutput: OutputType {
     let errorInfo: Driver<String>
     let loginEnable: Driver<Bool>
     let registerEnable: Driver<Bool>
@@ -81,105 +187,4 @@ struct LoginOutput: ViewModelToViewOutput {
     
     let registeSuccess: Driver<(Bool, String?)>
     let loginSuccess: Driver<(Bool, String?)>
-    init(viewModel: MVVMViewModel) {
-        
-        let viewModel = viewModel as! LoginViewModel
-        let input = viewModel.input as! LoginInput
-        
-        // 输入合法性
-        errorInfo = Driver.combineLatest(input.loginUser, input.loginPass, input.registerUser, input.registerCode, input.registerPass, input.showState).map { (user, passwd, rUser, rCode, rPass, showState) in
-            
-            
-            if showState == 0 {
-                if user.count == 0 {
-                    return "请输入用户名"
-                }
-                if passwd.count == 0 {
-                    return "请输入密码"
-                }
-            } else {
-                if rUser.count == 0 {
-                    return "请输入用户名"
-                }
-                if rCode.count != 6 {
-                    return "请输入正确的验证码"
-                }
-            
-                if rPass.count == 0 {
-                    return "请确认密码"
-                }
-                
-                if rPass.count < 6 {
-                    return "密码强度不足"
-                }
-            }
-            
-            
-            return ""
-        }
-        
-        
-        loginEnable = errorInfo.map({ (error) in
-            return error.count == 0
-        })
-        
-        registerEnable = loginEnable
-        
-        // 注册手机号合法
-        let rUserEnable:Driver<Bool> = input.registerUser.map({ (user) -> Bool in
-            return user.count == 11
-        })
-        
-        // 获取到的验证码
-        getCodeValue = input.getCode.withLatestFrom(input.registerUser).flatMapLatest({ user in
-            return viewModel.getCodeAction(mobile: user)
-        })
-        
-        
-        // 倒计时
-        let timeDuration = 60
-        let timer: Driver<Int> = getCodeValue.flatMapLatest { _ -> Driver<Int> in
-            Observable.timer(0, period: 1, scheduler: MainScheduler.instance)
-                .take(timeDuration)
-                .asDriver(onErrorJustReturn: 0)
-                .map({ (value) -> Int in
-                    return (timeDuration - 1 - Int(value))
-                })
-        }.startWith(0)
-        
-        // 获取验证码按钮有效
-        getCodeEnable = Driver.combineLatest(rUserEnable, timer).map({ (enable, timerValue) -> Bool in
-            
-            if enable {
-                
-                return timerValue == 0
-            }
-            return false
-        })
-        
-        // 验证码按钮文字
-        getCodeText = timer.map({ (value) -> String in
-            if value == 0 {
-                return "获取验证码"
-            } else {
-                return "\(value)s后重新获取"
-            }
-        })
-        
-        
-        
-        
-        // 注册成功
-        let values = Driver.combineLatest(input.registerUser, input.registerCode, input.registerPass)
-        registeSuccess = input.registeAction.withLatestFrom(values).flatMapLatest({ (user, code, pass)  in
-            return viewModel.register(user: user, code: code, pass: pass)
-        })
-        
-        // 登录成功
-        let lValues = Driver.combineLatest(input.loginUser, input.loginPass)
-        loginSuccess = input.login.withLatestFrom(lValues).flatMapLatest({ (user, pass) in
-            
-            return viewModel.login(user: user, pass: pass)
-        })
-    }
 }

@@ -8,13 +8,25 @@
 
 import UIKit
 import Hue
+import RxSwift
+
 enum FLButtonBarItemType {
     case text    // 文本
     case image   // 图片
 }
 
-class BaseViewController: MVVMView {
+class BaseViewController: UIViewController, FLViewType {
+    
+    
+    var viewModel: FLViewModelType?
+    
+    func provideInput() -> InputType? {
+        return nil
+    }
+    
 
+    
+    let disposeBag = DisposeBag()
     
     var translucentNav: Bool!{
         didSet {
@@ -54,18 +66,24 @@ class BaseViewController: MVVMView {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = kSecondTintColor
+        self.view.backgroundColor = kBackgroundColor
         self.translucentNav = false
         self.rightSwipeEnable = true
         self.hiddenBack = false
         // Do any additional setup after loading the view.
         createUI()
+        bindViewModel()
     }
     
     func createUI() {
         
     }
     
+    func bindViewModel() {
+        
+    }
+    
+
     
     func addButtonBar(type: FLButtonBarItemType, isLeft: Bool, title: String?, image: String?, action: Selector, textAttributes: [NSAttributedString.Key : Any]?) -> UIBarButtonItem? {
         

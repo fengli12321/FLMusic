@@ -20,12 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = .white
         
         setting()
+        
         if let token = getToken() {
             NetworkManager.instance.token = token
             
+            window?.rootViewController = MyTabBarController()
             
-            let main = UIStoryboard(name: "Main", bundle: nil)
-            window?.rootViewController = main.instantiateInitialViewController()
         } else {
             
             let login = UIStoryboard(name: "Login", bundle: nil)
@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func UISetting() {
         
-        UINavigationBar.appearance().barTintColor = kSecondTintColor
-        UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.white, .font : kBFont(size: 16)]
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: kNFont(size: 16), .foregroundColor: UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
-        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : kButtonTintColor], for: .selected)
+        UINavigationBar.appearance().barTintColor = .white
+        UINavigationBar.appearance().tintColor = .red
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor : UIColor.orange, .font : kBFont(size: 16)]
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: kNFont(size: 16), .foregroundColor: UIColor.blue], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : UIColor.green], for: .normal)
+        UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor : UIColor.red], for: .selected)
     }
     
     func otherSetting() {

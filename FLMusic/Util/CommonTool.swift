@@ -20,6 +20,12 @@ func getToken() -> String? {
     return getKeychainManager()[string: tokenKeychain]
 }
 
+func removeToken() {
+    
+    let keychain = getKeychainManager()
+    try? keychain.remove(tokenKeychain)
+}
+
 func getKeychainManager() -> Keychain {
     return Keychain(service: "com.FoxPower.FLMusic")
 }

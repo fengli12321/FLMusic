@@ -34,10 +34,7 @@ class LoginViewController: BaseViewController {
     
     var showState = BehaviorRelay(value: 0)  // 展示状态 0 登录 1 注册
     
-    override var inputType: ViewToViewModelInput.Type? {
-        return LoginInput.self
-    }
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,16 +56,17 @@ class LoginViewController: BaseViewController {
             
             self.login(show: true)
         }).disposed(by: disposeBag)
-    }
-
-    override func provideViewModelType() -> MVVMViewModel.Type? {
-        return LoginViewModel.self
-    }
-    
-    
-    override func rxDrive(viewModelOutput: ViewModelToViewOutput) {
         
-        let output = viewModelOutput as! LoginOutput
+        
+    }
+    
+    
+    override func bindViewModel() {
+        
+        viewModel = LoginViewModel()
+        let output = viewModel!.transform(input: provideInput()) as! LoginOutput
+        
+        
         output.errorInfo.drive(self.errorLabel.rx.text).disposed(by: disposeBag)
         output.loginEnable.drive(self.rx.loginBtnEnable).disposed(by: disposeBag)
         output.registerEnable.drive(self.rx.registerBtnEnable).disposed(by: disposeBag)
@@ -109,6 +107,23 @@ class LoginViewController: BaseViewController {
     
     
     
+    override func provideInput() -> InputType? {
+        
+        let showState = self.showState.asDriver()
+        let loginUser = self.userField.rx.text.orEmpty.asDriver()
+        let loginPass = self.passField.rx.text.orEmpty.asDriver()
+        let login = self.loginBtn.rx.tap.asSignal()
+        
+        
+        let registerUser = self.rUserField.rx.text.orEmpty.asDriver()
+        let registerCode = self.rCodeField.rx.text.orEmpty.asDriver()
+        let registerPass = self.rPassField.rx.text.orEmpty.asDriver()
+        let getCode = self.getCodeBtn.rx.tap.asSignal()
+        let registeAction = self.registerActionBtn.rx.tap.asSignal()
+        
+        return LoginInput(loginUser: loginUser, loginPass: loginPass, registerUser: registerUser, registerCode: registerCode, registerPass: registerPass, login: login, showState: showState, getCode: getCode, registeAction: registeAction)
+    }
+    
     // MARK: Private
     
     func login(show: Bool) {
@@ -122,6 +137,18 @@ class LoginViewController: BaseViewController {
         })
     }
 
+}
+
+struct LoginInput: InputType {
+    let loginUser: Driver<String>
+    let loginPass: Driver<String>
+    let registerUser: Driver<String>
+    let registerCode: Driver<String>
+    let registerPass: Driver<String>
+    let login: Signal<Void>
+    let showState: Driver<Int>
+    let getCode: Signal<Void>
+    let registeAction: Signal<Void>
 }
 
 
@@ -141,31 +168,3 @@ extension Reactive where Base : LoginViewController {
     }
 }
 
-struct LoginInput: ViewToViewModelInput {
-    
-    let loginUser: Driver<String>
-    let loginPass: Driver<String>
-    let registerUser: Driver<String>
-    let registerCode: Driver<String>
-    let registerPass: Driver<String>
-    let login: Signal<Void>
-    let showState: Driver<Int>
-    let getCode: Signal<Void>
-    let registeAction: Signal<Void>
-    init(view: MVVMView) {
-        
-        let view = view as! LoginViewController
-        
-        showState = view.showState.asDriver()
-        loginUser = view.userField.rx.text.orEmpty.asDriver()
-        loginPass = view.passField.rx.text.orEmpty.asDriver()
-        login = view.loginBtn.rx.tap.asSignal()
-    
-        
-        registerUser = view.rUserField.rx.text.orEmpty.asDriver()
-        registerCode = view.rCodeField.rx.text.orEmpty.asDriver()
-        registerPass = view.rPassField.rx.text.orEmpty.asDriver()
-        getCode = view.getCodeBtn.rx.tap.asSignal()
-        registeAction = view.registerActionBtn.rx.tap.asSignal()
-    }
-}

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class MusicPlayerViewController: BaseViewController {
 
-    var music: FindListDataType!
+    var music: JSON!
     
     
     override func viewDidLoad() {

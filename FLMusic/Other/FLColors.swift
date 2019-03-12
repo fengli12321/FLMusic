@@ -9,8 +9,9 @@
 import Foundation
 import Hue
 
-
-let kSepLineColor = UIColor(hex: "#E6E6E7")
-let kMainTintColor = UIColor(hex: "#131531")
-let kSecondTintColor = UIColor(hex: "#1B1C3F")
-let kButtonTintColor = UIColor(hex: "#1DE1C9")
+let kBackgroundColor = UIColor(hex: "#efefef")
+let kMainTextColor = UIColor(hex: "#383812")
+//let kSepLineColor = UIColor(hex: "#E6E6E7")
+//let kMainTintColor = UIColor(hex: "#131531")
+//let kSecondTintColor = UIColor(hex: "#1B1C3F")
+//let kButtonTintColor = UIColor(hex: "#1DE1C9")

@@ -26,6 +26,11 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.4.0):
     - RxAtomic (~> 4.4)
+  - SDCycleScrollView (1.75):
+    - SDWebImage (>= 4.0.0)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
   - SnapKit (4.2.0)
   - SwiftyJSON (4.2.0)
 
@@ -42,6 +47,7 @@ DEPENDENCIES:
   - RxCocoa
   - RxDataSources
   - RxSwift
+  - SDCycleScrollView
   - SnapKit
   - SwiftyJSON
 
@@ -62,6 +68,8 @@ SPEC REPOS:
     - RxCocoa
     - RxDataSources
     - RxSwift
+    - SDCycleScrollView
+    - SDWebImage
     - SnapKit
     - SwiftyJSON
 
@@ -81,9 +89,11 @@ SPEC CHECKSUMS:
   RxCocoa: df63ebf7b9a70d6b4eeea407ed5dd4efc8979749
   RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxSwift: 5976ecd04fc2fefd648827c23de5e11157faa973
+  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: b50418638dd4d567d5424797620d03f21c914269
+PODFILE CHECKSUM: 6d035d7744fa99321923c6e2dbaba1ed7568b4f8
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.1
