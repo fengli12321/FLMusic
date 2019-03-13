@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class FindIntemCell: UICollectionViewCell {
+class FindItemCell: UICollectionViewCell {
     
     var backImage = UIImageView()
     private let listenIcon = UIImageView(image: #imageLiteral(resourceName: "icon_find_listen"))
@@ -24,6 +24,7 @@ class FindIntemCell: UICollectionViewCell {
     func createUI() {
         
         addSubview(backImage)
+        backImage.clipsToBounds = true
         backImage.contentMode = .scaleAspectFill
         backImage.snp.makeConstraints { (make) in
             make.top.left.bottom.right.equalToSuperview()
@@ -45,10 +46,12 @@ class FindIntemCell: UICollectionViewCell {
         }
         
         addSubview(nameLabel)
+        nameLabel.numberOfLines = 2
         nameLabel.textColor = .white
         nameLabel.font = kNAutoFont(size: 12)
         nameLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(kAutoSize(size: 10))
+            make.right.equalToSuperview().offset(kAutoSize(size: -10))
             make.bottom.equalToSuperview().offset(-kAutoSize(size: 5))
         }
     }

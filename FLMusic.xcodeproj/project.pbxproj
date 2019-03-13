@@ -32,7 +32,7 @@
 		9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3421F86FE900792E16 /* MyTabBarController.swift */; };
 		9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3621FAA14000792E16 /* FLToastView.swift */; };
 		98E8CF7A223770B70049CE1F /* FinderHeaderCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */; };
-		98E8CF7C22378FA70049CE1F /* FindIntemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF7B22378FA70049CE1F /* FindIntemCell.swift */; };
+		98E8CF7C22378FA70049CE1F /* FindItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF7B22378FA70049CE1F /* FindItemCell.swift */; };
 		98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,7 +66,7 @@
 		9845FA3421F86FE900792E16 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		9845FA3621FAA14000792E16 /* FLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLToastView.swift; sourceTree = "<group>"; };
 		98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderHeaderCycleView.swift; sourceTree = "<group>"; };
-		98E8CF7B22378FA70049CE1F /* FindIntemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIntemCell.swift; sourceTree = "<group>"; };
+		98E8CF7B22378FA70049CE1F /* FindItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindItemCell.swift; sourceTree = "<group>"; };
 		98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -242,7 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */,
-				98E8CF7B22378FA70049CE1F /* FindIntemCell.swift */,
+				98E8CF7B22378FA70049CE1F /* FindItemCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -378,6 +378,7 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/YYCache/YYCache.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -402,6 +403,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYCache.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -454,7 +456,7 @@
 				122FC21D21F20009007E520B /* LoginViewController.swift in Sources */,
 				9845FA3321F8518E00792E16 /* FLColors.swift in Sources */,
 				122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */,
-				98E8CF7C22378FA70049CE1F /* FindIntemCell.swift in Sources */,
+				98E8CF7C22378FA70049CE1F /* FindItemCell.swift in Sources */,
 				98E8CF7A223770B70049CE1F /* FinderHeaderCycleView.swift in Sources */,
 				9845FA2B21F8451C00792E16 /* FindViewController.swift in Sources */,
 				9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */,
@@ -607,6 +609,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NP9ZKHM3F4;
 				INFOPLIST_FILE = FLMusic/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -614,7 +617,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -626,6 +629,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NP9ZKHM3F4;
 				INFOPLIST_FILE = FLMusic/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -633,7 +637,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.FoxPower.FLMusic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

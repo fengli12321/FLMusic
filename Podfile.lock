@@ -33,6 +33,7 @@ PODS:
   - SDWebImage/Core (4.4.6)
   - SnapKit (4.2.0)
   - SwiftyJSON (4.2.0)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - Hero
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - SDCycleScrollView
   - SnapKit
   - SwiftyJSON
+  - YYCache
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -72,6 +74,7 @@ SPEC REPOS:
     - SDWebImage
     - SnapKit
     - SwiftyJSON
+    - YYCache
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
@@ -93,7 +96,8 @@ SPEC CHECKSUMS:
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 6d035d7744fa99321923c6e2dbaba1ed7568b4f8
+PODFILE CHECKSUM: 94a557992fcf94b59d543f24313eda2e40065449
 
 COCOAPODS: 1.6.1

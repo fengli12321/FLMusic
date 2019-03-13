@@ -96,8 +96,7 @@ class LoginViewController: BaseViewController {
             if success {
                 HUD.flash(.labeledSuccess(title: nil, subtitle: "登录成功"), onView: nil, delay: 1, completion: { _ in
                     
-                    let main = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
-                    kKeyWindow.rootViewController = main
+                    kKeyWindow.rootViewController = MyTabBarController()
                 })
             } else {
                 HUD.flash(.labeledError(title: "登录失败", subtitle: msg), delay: 2)

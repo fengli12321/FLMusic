@@ -17,8 +17,9 @@ import Kingfisher
 import SwiftyJSON
 import RxCocoa
 import SDCycleScrollView
+import Hero
 
-class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
+class FindViewController: BaseViewController, SDCycleScrollViewDelegate, UICollectionViewDataSource {
     
     
     var collectionView: UICollectionView!
@@ -28,6 +29,9 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
         super.viewDidLoad()
     }
     override func createUI() {
+        
+        self.hero.isEnabled = true
+        self.view.hero.isEnabled = true
         
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kScreenWidth/3.0, height: kScreenWidth/3.0)
@@ -40,12 +44,12 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
         collectionView.backgroundColor = kBackgroundColor
         view.addSubview(collectionView)
         
-        collectionView.register(FindIntemCell.self, forCellWithReuseIdentifier: "FindIntemCell")
+        collectionView.register(FindItemCell.self, forCellWithReuseIdentifier: "FindItemCell")
         
         collectionView.register(FinderHeaderCycleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
         
-        
+        collectionView.dataSource = self
         createHeaderView()
     }
     
@@ -61,6 +65,7 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
     }
     
     override func bindViewModel() {
+        
         viewModel = FindViewModel()
         
         let output = viewModel?.transform(input: provideInput()) as! FindOutput
@@ -72,29 +77,53 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
             
             self.cycleView.imageURLStringsGroup = images
         }).disposed(by: disposeBag)
+
         
+//        output.musics.drive(collectionView.rx.items(cellIdentifier: "FindItemCell", cellType: FindItemCell.self), curriedArgument: {index, item, cell in
 //
-        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<Void, JSON>>(
-            configureCell: { s, cv, ip, item  in
-                
-                let cell = cv.dequeueReusableCell(withReuseIdentifier: "FindIntemCell", for: ip) as! FindIntemCell
-                cell.listenCountLabel.text = item["like_num"].stringValue
-                cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
-                cell.nameLabel.text = item["name"].stringValue
-                return cell
-        })
+//            cell.listenCountLabel.text = item["like_num"].stringValue
+//            cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
+//            cell.nameLabel.text = item["name"].stringValue
+//
+//            cell.hero.id = "image_\(index)"
+//            cell.backImage.hero.modifiers = [.fade, .position(CGPoint(x: 5, y: 5))]
+//        }).disposed(by: disposeBag)
         
-        let datas = output.musics.map { (item) in
-            return [SectionModel(model: (), items: item)]
-        }
-//        datas.drive(collectionView.rx.items(dataSource: dataSource)
-
-        datas.asObservable().bind(to: self.collectionView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
-       
+        output.musics.drive(onNext: { [unowned self] _ in
+            self.collectionView.reloadData()
+        }).disposed(by: disposeBag)
+        
+        collectionView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
+            
+            let viewModel = self.viewModel as! FindViewModel
+            let item = viewModel.datas[indexPath.row]
+            let musicVC = MusicPlayerViewController(music: item)
+            self.navigationController?.present(musicVC, animated: true, completion: nil)
+            
+        }).disposed(by: disposeBag)
+        
     }
- 
-
-   
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let viewModel = self.viewModel as? FindViewModel
+        return viewModel?.datas.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FindItemCell", for: indexPath) as! FindItemCell
+        let viewModel = self.viewModel as! FindViewModel
+        let item = viewModel.datas[indexPath.row]
+        
+        cell.listenCountLabel.text = item["like_num"].stringValue
+        cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
+        cell.nameLabel.text = item["name"].stringValue
+        
+        cell.hero.id = "image_\(index)"
+        cell.backImage.hero.modifiers = [.fade, .position(CGPoint(x: 5, y: 5))]
+        return cell
+    }
 }
 
 

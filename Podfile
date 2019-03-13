@@ -16,6 +16,8 @@ target 'FLMusic' do
  pod 'MJRefresh' # 列表刷新
  
  pod 'SDCycleScrollView' # 轮播
+ 
+ pod 'YYCache'
  # rx
  pod 'RxSwift'
  pod 'RxCocoa'

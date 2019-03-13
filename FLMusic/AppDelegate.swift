@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setting()
         
+        
         if let token = getToken() {
             NetworkManager.instance.token = token
             

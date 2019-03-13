@@ -10,13 +10,14 @@ import Foundation
 import SwiftyJSON
 import RxCocoa
 import RxSwift
-
+import YYCache
 
 class FindViewModel: FLViewModelType{
     
     var datas = [JSON]()
     
     var next: String?
+    
  
     func transform(input: InputType?) -> OutputType? {
     
@@ -28,7 +29,12 @@ class FindViewModel: FLViewModelType{
     
     func requestCycleData() -> Driver<[JSON]>{
         
-        return NetworkManager.request(.recomment).map({ (data) in
+        return NetworkManager.request(.recomment).do(onSuccess: { (data) in
+            
+//            let object = data.arrayObject
+//            
+//            let cache = YYCache(name: "test")
+        }).map({ (data) in
             
             let results = data.arrayValue
             return results
