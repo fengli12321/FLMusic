@@ -15,6 +15,7 @@ class FindItemCell: UICollectionViewCell {
     private let listenIcon = UIImageView(image: #imageLiteral(resourceName: "icon_find_listen"))
     var listenCountLabel = UILabel()
     var nameLabel = UILabel()
+    private var hasAnimated = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -54,6 +55,24 @@ class FindItemCell: UICollectionViewCell {
             make.right.equalToSuperview().offset(kAutoSize(size: -10))
             make.bottom.equalToSuperview().offset(-kAutoSize(size: 5))
         }
+    }
+    
+    
+    func performAnimation(delay: TimeInterval) {
+        
+        if hasAnimated {
+            return
+        }
+        hasAnimated = true
+        
+        self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+        self.transform = CGAffineTransform(translationX: 0, y: 15).concatenating(self.transform)
+        self.alpha = 0.0
+        UIView.animate(withDuration: 0.3, delay: delay, options: .curveEaseInOut, animations: {
+            
+            self.transform = CGAffineTransform.identity
+            self.alpha = 1
+        }, completion: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -17,9 +17,8 @@ import Kingfisher
 import SwiftyJSON
 import RxCocoa
 import SDCycleScrollView
-import Hero
 
-class FindViewController: BaseViewController, SDCycleScrollViewDelegate, UICollectionViewDataSource {
+class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
     
     
     var collectionView: UICollectionView!
@@ -29,10 +28,7 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate, UIColle
         super.viewDidLoad()
     }
     override func createUI() {
-        
-        self.hero.isEnabled = true
-        self.view.hero.isEnabled = true
-        
+    
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kScreenWidth/3.0, height: kScreenWidth/3.0)
         layout.scrollDirection = .vertical
@@ -49,8 +45,14 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate, UIColle
         collectionView.register(FinderHeaderCycleView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
         
-        collectionView.dataSource = self
         createHeaderView()
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
     }
     
     func createHeaderView() {
@@ -79,17 +81,18 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate, UIColle
         }).disposed(by: disposeBag)
 
         
-//        output.musics.drive(collectionView.rx.items(cellIdentifier: "FindItemCell", cellType: FindItemCell.self), curriedArgument: {index, item, cell in
-//
-//            cell.listenCountLabel.text = item["like_num"].stringValue
-//            cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
-//            cell.nameLabel.text = item["name"].stringValue
-//
-//            cell.hero.id = "image_\(index)"
-//            cell.backImage.hero.modifiers = [.fade, .position(CGPoint(x: 5, y: 5))]
-//        }).disposed(by: disposeBag)
+        output.musics.drive(collectionView.rx.items(cellIdentifier: "FindItemCell", cellType: FindItemCell.self), curriedArgument: {index, item, cell in
+
+            cell.listenCountLabel.text = item["like_num"].stringValue
+            cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
+            cell.nameLabel.text = item["name"].stringValue
+        
+            cell.performAnimation(delay: 0.1*Double(index))
+
+        }).disposed(by: disposeBag)
         
         output.musics.drive(onNext: { [unowned self] _ in
+            
             self.collectionView.reloadData()
         }).disposed(by: disposeBag)
         
@@ -105,25 +108,7 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate, UIColle
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let viewModel = self.viewModel as? FindViewModel
-        return viewModel?.datas.count ?? 0
-    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FindItemCell", for: indexPath) as! FindItemCell
-        let viewModel = self.viewModel as! FindViewModel
-        let item = viewModel.datas[indexPath.row]
-        
-        cell.listenCountLabel.text = item["like_num"].stringValue
-        cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
-        cell.nameLabel.text = item["name"].stringValue
-        
-        cell.hero.id = "image_\(index)"
-        cell.backImage.hero.modifiers = [.fade, .position(CGPoint(x: 5, y: 5))]
-        return cell
-    }
 }
 
 
