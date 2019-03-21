@@ -31,6 +31,9 @@
 		9845FA3321F8518E00792E16 /* FLColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3221F8518E00792E16 /* FLColors.swift */; };
 		9845FA3521F86FE900792E16 /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3421F86FE900792E16 /* MyTabBarController.swift */; };
 		9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9845FA3621FAA14000792E16 /* FLToastView.swift */; };
+		98C5523E2240EBE000F5B6BA /* FLListReresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C5523D2240EBE000F5B6BA /* FLListReresh.swift */; };
+		98C552412243791100F5B6BA /* PathManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C552402243791100F5B6BA /* PathManager.swift */; };
+		98C552432243861700F5B6BA /* FLSearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C552422243861700F5B6BA /* FLSearchButton.swift */; };
 		98E8CF7A223770B70049CE1F /* FinderHeaderCycleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */; };
 		98E8CF7C22378FA70049CE1F /* FindItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E8CF7B22378FA70049CE1F /* FindItemCell.swift */; };
 		98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */; };
@@ -65,6 +68,9 @@
 		9845FA3221F8518E00792E16 /* FLColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLColors.swift; sourceTree = "<group>"; };
 		9845FA3421F86FE900792E16 /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		9845FA3621FAA14000792E16 /* FLToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLToastView.swift; sourceTree = "<group>"; };
+		98C5523D2240EBE000F5B6BA /* FLListReresh.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLListReresh.swift; sourceTree = "<group>"; };
+		98C552402243791100F5B6BA /* PathManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathManager.swift; sourceTree = "<group>"; };
+		98C552422243861700F5B6BA /* FLSearchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLSearchButton.swift; sourceTree = "<group>"; };
 		98E8CF79223770B70049CE1F /* FinderHeaderCycleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinderHeaderCycleView.swift; sourceTree = "<group>"; };
 		98E8CF7B22378FA70049CE1F /* FindItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindItemCell.swift; sourceTree = "<group>"; };
 		98F2D1DE22019D0200B37B7C /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				122FC20721F20008007E520B /* NetworkManager.swift */,
+				98C552402243791100F5B6BA /* PathManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -180,6 +187,8 @@
 				9845FA2C21F8472B00792E16 /* FLSearchView.swift */,
 				9845FA3021F84DB000792E16 /* BaseNavigationController.swift */,
 				9845FA3421F86FE900792E16 /* MyTabBarController.swift */,
+				98C5523D2240EBE000F5B6BA /* FLListReresh.swift */,
+				98C552422243861700F5B6BA /* FLSearchButton.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -442,11 +451,13 @@
 				9845FA2321F6C4D800792E16 /* CommonTool.swift in Sources */,
 				122FC21721F20009007E520B /* NetworkManager.swift in Sources */,
 				122FC21821F20009007E520B /* MVVM.swift in Sources */,
+				98C552432243861700F5B6BA /* FLSearchButton.swift in Sources */,
 				122FC1F021F1FEE5007E520B /* ViewController.swift in Sources */,
 				122FC21621F20009007E520B /* FLConst.swift in Sources */,
 				122FC1EE21F1FEE5007E520B /* AppDelegate.swift in Sources */,
 				9845FA2D21F8472B00792E16 /* FLSearchView.swift in Sources */,
 				98F2D1DF22019D0200B37B7C /* MusicPlayerViewController.swift in Sources */,
+				98C5523E2240EBE000F5B6BA /* FLListReresh.swift in Sources */,
 				122FC21A21F20009007E520B /* UIImageExtension.swift in Sources */,
 				9845FA3121F84DB000792E16 /* BaseNavigationController.swift in Sources */,
 				122FC21921F20009007E520B /* BaseViewController.swift in Sources */,
@@ -454,6 +465,7 @@
 				122FC21B21F20009007E520B /* UIViewExtension.swift in Sources */,
 				9845FA3721FAA14000792E16 /* FLToastView.swift in Sources */,
 				122FC21D21F20009007E520B /* LoginViewController.swift in Sources */,
+				98C552412243791100F5B6BA /* PathManager.swift in Sources */,
 				9845FA3321F8518E00792E16 /* FLColors.swift in Sources */,
 				122FC21C21F20009007E520B /* LoginViewModel.swift in Sources */,
 				98E8CF7C22378FA70049CE1F /* FindItemCell.swift in Sources */,

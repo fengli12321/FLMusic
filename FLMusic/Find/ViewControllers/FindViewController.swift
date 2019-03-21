@@ -16,6 +16,7 @@ import Hue
 import Kingfisher
 import SwiftyJSON
 import RxCocoa
+import RxSwift
 import SDCycleScrollView
 
 class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
@@ -23,6 +24,9 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
     
     var collectionView: UICollectionView!
     var cycleView: SDCycleScrollView!
+    
+    private let headerRefresh = PublishSubject<Void>()
+    private let footerRefresh = PublishSubject<Void>()
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +51,38 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
         
         createHeaderView()
         
+        
+        let header = MJRefreshNormalHeader { [unowned self] in
+            
+            self.headerRefresh.onNext(())
+            self.collectionView.mj_footer.isHidden = true
+        }
+        
+        let footer = MJRefreshAutoNormalFooter { [unowned self] in
+            self.footerRefresh.onNext(())
+            self.collectionView.mj_header.isHidden = true
+        }
+        footer?.triggerAutomaticallyRefreshPercent = 2
+    
+        
+        collectionView.mj_header = header
+        collectionView.mj_footer = footer
+        
+        
+        collectionView.mj_header.beginRefreshing()
+        
+        
+        createTitleView()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func createTitleView() {
         
+        
+        let searchButton = FLSearchButton(width: kScreenWidth)
+        self.navigationItem.titleView = searchButton
         
     }
+    
     
     func createHeaderView() {
         cycleView = SDCycleScrollView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kAutoSize(size: 158)), delegate: self, placeholderImage: UIImage())
@@ -63,13 +92,13 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
     }
     
     override func provideInput() -> InputType? {
-        return nil
+        return FinderInput(headerRefresh: headerRefresh.asDriver(onErrorJustReturn:()), footerRefresh: footerRefresh.asDriver(onErrorJustReturn: ()))
     }
     
     override func bindViewModel() {
         
         viewModel = FindViewModel()
-        
+    
         let output = viewModel?.transform(input: provideInput()) as! FindOutput
         output.cycleData.drive(onNext: { [unowned self] (data) in
             var images = [String]()
@@ -87,13 +116,36 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
             cell.backImage.kf.setImage(with: URL(string: item["image"].stringValue))
             cell.nameLabel.text = item["name"].stringValue
         
-            cell.performAnimation(delay: 0.1*Double(index))
+            cell.performAnimation(delay: 0.1*Double(index%12))
 
         }).disposed(by: disposeBag)
         
         output.musics.drive(onNext: { [unowned self] _ in
             
             self.collectionView.reloadData()
+        }).disposed(by: disposeBag)
+        
+        
+        output.refreshStatus.drive(onNext: { status in
+            
+            switch status {
+
+            case .endRefresh:
+                
+                print("123==============")
+                self.collectionView.mj_header.endRefreshing()
+                self.collectionView.mj_footer.endRefreshing()
+                self.collectionView.mj_header.isHidden = false
+                self.collectionView.mj_footer.isHidden = false
+            case .noMoreData:
+                print("321========================")
+                self.collectionView.mj_header.endRefreshing()
+                self.collectionView.mj_footer.endRefreshingWithNoMoreData()
+                self.collectionView.mj_header.isHidden = false
+                self.collectionView.mj_footer.isHidden = false
+            default:
+                break
+            }
         }).disposed(by: disposeBag)
         
         collectionView.rx.itemSelected.subscribe(onNext: { [unowned self] indexPath in
@@ -114,5 +166,7 @@ class FindViewController: BaseViewController, SDCycleScrollViewDelegate {
 
 struct FinderInput: InputType {
     
+    var headerRefresh: Driver<Void>
+    var footerRefresh: Driver<Void>
 }
 
